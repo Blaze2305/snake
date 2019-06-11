@@ -1,5 +1,5 @@
 let s;
-let size=10;
+let size=20;
 let food;
 let eaten;
 
@@ -61,8 +61,8 @@ function grid(){
 
 
 function add_food(){
-  let cols=floor(width/size);
-  let rows=floor(height/size);
+  let cols=floor(width/size)-1;
+  let rows=floor(height/size)-1;
 
   food=createVector(floor(random(cols)),floor(random(rows)))
   food.mult(size);
