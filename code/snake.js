@@ -9,7 +9,7 @@ class snake{
   }
 
   update(){
-    for(let i=0;i<this.length-1;i++){
+    for(let i=0;i<this.tail.length-1;i++){
       this.tail[i]=this.tail[i+1];
     }
     this.tail[length-1]=createVector(this.x,this.y)
