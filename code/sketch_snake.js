@@ -26,7 +26,7 @@ function draw() {
   text(max_score,60,560)
   push();
   noStroke();
-  fill(255,0,0);
+  fill(148,0,211);
   rect(food.x,food.y,size,size)
   pop();
 
@@ -38,11 +38,12 @@ function draw() {
     if(eaten){
       add_food();
     }
-    s.show();
+    s.show(1);
     s.update();
   }
   else{
     console.log("YOU DIED!")
+    s.show(0)
     noLoop();
   }
 
@@ -50,16 +51,16 @@ function draw() {
 
 
 function keyPressed(){
-  if(keyCode===UP_ARROW){
+  if(keyCode===UP_ARROW && s.dir_y!=1){
     s.change_dir(0,-1);
   }
-  else if (keyCode===DOWN_ARROW) {
+  else if (keyCode===DOWN_ARROW && s.dir_y!=-1) {
     s.change_dir(0,1);
   }
-  else if (keyCode===RIGHT_ARROW) {
+  else if (keyCode===RIGHT_ARROW && s.dir_x!=-1) {
     s.change_dir(1,0);
   }
-  else if(keyCode===LEFT_ARROW){
+  else if(keyCode===LEFT_ARROW && s.dir_x!=1){
     s.change_dir(-1,0);
   }
 }

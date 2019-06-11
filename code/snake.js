@@ -40,15 +40,26 @@ class snake{
     this.y=constrain(this.y,0,height-4*size);
   }
 
-  show(){
-    fill(255);
-    for(let i=0;i<this.tail.length;i++){
-      push();
-      fill(i*5+100)
-      rect(this.tail[i].x,this.tail[i].y,size,size);
-      pop();
+  show(a){
+    if(a){
+      fill(200);
+      for(let i=0;i<this.tail.length;i++){
+        push();
+        fill(i*5+100);
+        rect(this.tail[i].x,this.tail[i].y,size,size);
+        pop();
+      }
+      rect(this.x,this.y,size,size);
     }
-    rect(this.x,this.y,size,size);
+    else{
+      fill(255,0,0,100);
+      for(let i=0;i<this.tail.length;i++){
+        push();
+        rect(this.tail[i].x,this.tail[i].y,size,size);
+        pop();
+      }
+      rect(this.x,this.y,size,size);
+    }
   }
 
   change_dir(a,b){
