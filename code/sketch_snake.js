@@ -2,17 +2,28 @@ let s;
 let size=20;
 let food;
 let eaten;
+let reset_button;
+let max_score=0;
 
 function setup() {
   createCanvas(600,600);
   frameRate(10)
   add_food();
+  reset_button=createButton("CLICK TO RESET");
+  reset_button.mousePressed(restart);
   s=new snake();
 }
 
 function draw() {
   background(0)
-
+  textSize(15)
+  text('SCORE',530,20)
+  text(s.score,550,40)
+  if(max_score<s.score){
+    max_score=s.score;
+  }
+  text('HIGH SCORE',60,540)
+  text(max_score,60,560)
   push();
   noStroke();
   fill(255,0,0);
@@ -21,12 +32,19 @@ function draw() {
 
 
   grid()
-  eaten=s.eat(food);
-  if(eaten){
-    add_food();
+  if(!s.check()){
+
+    eaten=s.eat(food);
+    if(eaten){
+      add_food();
+    }
+    s.show();
+    s.update();
   }
-  s.show();
-  s.update();
+  else{
+    console.log("YOU DIED!")
+    noLoop();
+  }
 
 }
 
@@ -50,9 +68,9 @@ function grid(){
   let cols=floor(width/size);
   let rows=floor(height/size);
 
-  for(let i=0;i<cols-1;i++){
-    for(let j=0;j<rows-1;j++){
-      stroke(255);
+  for(let i=0;i<cols-4;i++){
+    for(let j=0;j<rows-4;j++){
+      stroke(255,100);
       noFill()
       rect(i*size,j*size,size,size);
     }
@@ -61,9 +79,15 @@ function grid(){
 
 
 function add_food(){
-  let cols=floor(width/size)-1;
-  let rows=floor(height/size)-1;
+  let cols=floor(width/size)-4;
+  let rows=floor(height/size)-4;
 
   food=createVector(floor(random(cols)),floor(random(rows)))
   food.mult(size);
+}
+
+
+function restart(){
+  s=new snake();
+  loop();
 }
